@@ -8,8 +8,9 @@ import { Navbar } from "./Navbar";
 
 export const Home = () => {
 	return (
-		<div className="home">
+		<div className="home-container">
 			<h1>Let's Listen to Yourself</h1>
+			<h1>yo</h1>
 		</div>
 	);
 };
