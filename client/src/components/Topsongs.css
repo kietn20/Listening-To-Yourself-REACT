@@ -52,15 +52,97 @@
 }
 
 .song-item {
-	width: 60vw;
 	/* border: #1db954 1px solid; */
+	/* background-color: rgb(104, 35, 46); */
+	background-color: #191414;
+	border-radius: 20px;
+	display: flex;
+	margin: auto;
+	justify-content: space-evenly;
+	align-items: center;
+	border: 2px solid #1db954;
 }
 
 .song-iframe {
 	border: none;
+	width: 60vw;
+	float: right;
+	padding: 5px;
+	z-index: 1;
+}
+
+.song-rank {
+	padding-left: 5px;
+}
+
+.song-rank h1 {
+	/* background-color: aquamarine; */
+	width: 100px;
+	text-align: center;
+	text-shadow: 5px 5px 1px #072612;
+	font-style: normal;
 }
 
 .song-popout {
 	width: 20vw;
-	background-color: pink;
+	background-color: rgb(227, 60, 88);
+}
+
+.show-button {
+	display: flex;
+	margin: 3rem auto 0 auto;
+	padding: 10px;
+	font-size: 20px;
+	font-weight: 300;
+	background-color: #1db954;
+	border-radius: 20px;
+	border: 1px transparent solid;
+	font-family: "Poppins", sans-serif;
+}
+
+.show-button:hover {
+	transition: 0.3s ease-out;
+	background-color: #0d903b;
+}
+
+/* -------------------Recommendations----------------- */
+.song-item-recommendation {
+	background-color: #191414;
+	/* background-color: rgb(30, 35, 30); */
+	border-radius: 20px;
+	display: flex;
+	margin: auto;
+	justify-content: space-evenly;
+	align-items: center;
+	border: 2px solid #1db954;
+}
+
+.song-item-recommendation:hover h1 {
+	visibility: visible;
+}
+
+.song-add {
+	padding-left: 5px;
+}
+
+.song-add button {
+	background: none;
+	border: none;
+}
+
+.song-add h1 {
+	/* background-color: rgb(128, 156, 146); */
+	border-radius: 20px;
+	width: 100px;
+	height: auto;
+	text-align: center;
+	text-shadow: 2px 2px 5px #072612;
+	font-style: normal;
+	text-decoration: none;
+	transition: 0.2s;
+	
+}
+
+.song-add h1:hover {
+	cursor: pointer;
 }

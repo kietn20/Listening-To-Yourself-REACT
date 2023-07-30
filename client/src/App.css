@@ -12,4 +12,13 @@ body {
 	/* font-family: "Merriweather", serif; */
 	/* font-family: "Noto Serif", serif; */
 	font-family: "Poppins", sans-serif;
+	background-image: url("./assets/homeGreenBG.svg");
+	background-repeat: no-repeat;
+	background-size: cover;
+	overflow-x: hidden;
+	overflow-y: auto;
+}
+
+Link {
+	text-decoration: none;
 }

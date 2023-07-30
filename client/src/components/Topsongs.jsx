@@ -8,12 +8,18 @@ export const Topsongs = ({ access_token }) => {
 		timeRange: "short_term",
 	});
 	const [songIDs, setSongIds] = useState([]);
+	const [showRecommendation, setShowRecommendation] = useState(false);
+	const [recommendations, setRecommendations] = useState([]);
 
 	const handleChange = (event) => {
 		setInputs({
 			...inputs,
 			[event.target.name]: event.target.value,
 		});
+	};
+
+	const handleClick = (event) => {
+		setShowRecommendation(!showRecommendation);
 	};
 
 	useEffect(() => {
@@ -39,14 +45,37 @@ export const Topsongs = ({ access_token }) => {
 			setSongIds(hold);
 		};
 
+		const getRecommendations = async () => {
+			const seed_tracks = songIDs.splice(0, 5).join(",");
+			const response = await axios.get(
+				"https://api.spotify.com/v1/recommendations",
+				{
+					headers: {
+						Authorization: `Bearer ${access_token}`,
+						"Content-Type": "application/json",
+					},
+					params: {
+						limit: 10,
+						seed_tracks: seed_tracks,
+					},
+				}
+			);
+			const hold = [];
+			await response.data.tracks.forEach((item) => {
+				hold.push(item.id);
+			});
+			setRecommendations(hold);
+		};
+
 		getSongs();
-	}, [inputs]);
+		if (songIDs.length > 0) {
+			getRecommendations();
+		}
+	}, [inputs, showRecommendation]);
 
 	return (
 		<div className="topsongs-conatiner">
 			<h1>My Top Songs</h1>
-			{/* <h1>limit: {inputs.limit}</h1>
-			<h1>limit: {inputs.timeRange}</h1> */}
 			<div className="topsongs-form">
 				<form>
 					<select
@@ -75,8 +104,11 @@ export const Topsongs = ({ access_token }) => {
 				</form>
 			</div>
 			<div className="songs">
-				{songIDs.map((id) => (
-					<div className="song-item">
+				{songIDs.map((id, index) => (
+					<div key={index} className="song-item">
+						<div className="song-rank">
+							<h1>{index + 1}</h1>
+						</div>
 						<iframe
 							className="song-iframe"
 							src={`https://open.spotify.com/embed/track/${id}?utm_source=generator`}
@@ -84,11 +116,36 @@ export const Topsongs = ({ access_token }) => {
 							height="152"
 							allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
 							loading="lazy"
-						><div className="song-popout">
-							</div>
-							</iframe>
+						>
+							<div className="song-popout"></div>
+						</iframe>
 					</div>
 				))}
+			</div>
+			<button className="show-button" onClick={handleClick}>
+				Get Recommendations For These Tracks
+			</button>
+			<div className="songs">
+				{showRecommendation &&
+					recommendations.map((id, idx) => (
+						<div key={idx} className="song-item-recommendation">
+							<div className="song-add">
+								<button>
+									<h1>+</h1>
+								</button>
+							</div>
+							<iframe
+								className="song-iframe"
+								src={`https://open.spotify.com/embed/track/${id}?utm_source=generator`}
+								width="100%"
+								height="152"
+								allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+								loading="lazy"
+							>
+								<div className="song-popout"></div>
+							</iframe>
+						</div>
+					))}
 			</div>
 		</div>
 	);
