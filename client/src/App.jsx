@@ -13,14 +13,14 @@ function App() {
 	useEffect(() => {
 		const getToken = async () => {
 			const response = await axios("http://localhost:3000/token");
-			console.log(
-				"response.data.access_token: " + response.data.access_token
-			);
+			// console.log(
+			// 	"response.data.access_token: " + response.data.access_token
+			// );
 			setToken(response.data.access_token);
 		};
 
 		getToken();
-	}, []);
+	}, [token]);
 
 	return (
 		<div className="App">
@@ -28,7 +28,10 @@ function App() {
 				<Navbar token={token} />
 				<Routes>
 					<Route path="/*" element={<Home />}></Route>
-					<Route path="/top-songs" element={<Topsongs />}></Route>
+					<Route
+						path="/top-songs"
+						element={<Topsongs access_token={token} />}
+					></Route>
 					<Route path="/login" element={<Login />}></Route>
 				</Routes>
 			</BrowserRouter>
