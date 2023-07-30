@@ -76,14 +76,18 @@ export const Topsongs = ({ access_token }) => {
 			</div>
 			<div className="songs">
 				{songIDs.map((id) => (
-					<iframe
-						className="song-item"
-						src={`https://open.spotify.com/embed/track/${id}?utm_source=generator`}
-						width="60%"
-						height="152"
-						allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-						loading="lazy"
-					></iframe>
+					<div className="song-item">
+						<iframe
+							className="song-iframe"
+							src={`https://open.spotify.com/embed/track/${id}?utm_source=generator`}
+							width="100%"
+							height="152"
+							allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+							loading="lazy"
+						><div className="song-popout">
+							</div>
+							</iframe>
+					</div>
 				))}
 			</div>
 		</div>

@@ -52,5 +52,15 @@
 }
 
 .song-item {
+	width: 60vw;
+	/* border: #1db954 1px solid; */
+}
+
+.song-iframe {
 	border: none;
+}
+
+.song-popout {
+	width: 20vw;
+	background-color: pink;
 }
