@@ -22,7 +22,7 @@ export const Modal = ({ closeModal, access_token, songToAdd }) => {
 			`https://api.spotify.com/v1/playlists/${chosenPlaylistID}/tracks`,
 			{
 				headers: {
-					Authorization: `Bearer BQBFkNxW8z-2Uk94oQ1zaJNzF4Njin2i4DD50HEGeGOe2KJT5iTItM-PxOKqd2-BBKrjVWJdQW2e-QwuYMAZ-HidGdUNDFYANlqmNIhSyBjj0kfcl2XIE0cGguvZhZnw-y98lqwu8EPOdFIYkXKKPMTGqds7SutDOQY-YgUWgr7-YrzTgdK3VDt9ZMTEV-Z4rjdIrdUn4o1apaLa6c61rnDv8sBUdjTrZpsjV__Rbsvn72YKrbFR0Fe-87IryHuGJHxF_nGlO73y`,
+					Authorization: `Bearer ${access_token}`,
 					"Content-Type": "application/json",
 				},
 				params: {
