@@ -9,13 +9,32 @@ import { Topsongs } from "./components/Topsongs";
 
 function App() {
 	const [token, setToken] = useState("");
+	const [refreshToken, setRefreshToken] = useState("");
 
 	useEffect(() => {
 		const getToken = async () => {
-			const response = await axios("http://localhost:3000/token");
-			// console.log(
-			// 	"response.data.access_token: " + response.data.access_token
-			// );
+			try {
+				const response = await axios("http://localhost:3000/token");
+				// console.log(
+				// 	"response.data.access_token: " + response.data.access_token
+				// );
+				setToken(response.data.access_token);
+				setRefreshToken(response.data.refresh_token);
+			} catch (error) {
+				console.log(error);
+				getRefreshToken();
+			}
+		};
+
+		const getRefreshToken = async () => {
+			const response = await axios.get(
+				"http://localhost:3000/refresh_token",
+				{
+					data: {
+						refresh_token: refreshToken,
+					},
+				}
+			);
 			setToken(response.data.access_token);
 		};
 

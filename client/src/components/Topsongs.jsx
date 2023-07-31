@@ -1,6 +1,8 @@
 import "./Topsongs.css";
 import axios from "axios";
 import { useEffect, useState } from "react";
+import { Modal } from "./Modal";
+import { redirect } from "react-router-dom";
 
 export const Topsongs = ({ access_token }) => {
 	const [inputs, setInputs] = useState({
@@ -10,6 +12,8 @@ export const Topsongs = ({ access_token }) => {
 	const [songIDs, setSongIds] = useState([]);
 	const [showRecommendation, setShowRecommendation] = useState(false);
 	const [recommendations, setRecommendations] = useState([]);
+	const [showModal, setShowModal] = useState(false);
+	const [songToAdd, setSongToAdd] = useState("");
 
 	const handleChange = (event) => {
 		setInputs({
@@ -23,26 +27,29 @@ export const Topsongs = ({ access_token }) => {
 	};
 
 	useEffect(() => {
-		console.log("access_token: " + access_token);
 		const getSongs = async () => {
-			const response = await axios.get(
-				"https://api.spotify.com/v1/me/top/tracks",
-				{
-					headers: {
-						Authorization: `Bearer ${access_token}`,
-						"Content-Type": "application/json",
-					},
-					params: {
-						time_range: inputs.timeRange,
-						limit: inputs.limit,
-					},
-				}
-			);
-			const hold = [];
-			await response.data.items.forEach((item) => {
-				hold.push(item.id);
-			});
-			setSongIds(hold);
+			try {
+				const response = await axios.get(
+					"https://api.spotify.com/v1/me/top/tracks",
+					{
+						headers: {
+							Authorization: `Bearer ${access_token}`,
+							"Content-Type": "application/json",
+						},
+						params: {
+							time_range: inputs.timeRange,
+							limit: inputs.limit,
+						},
+					}
+				);
+				const hold = [];
+				await response.data.items.forEach((item) => {
+					hold.push(item.id);
+				});
+				setSongIds(hold);
+			} catch (error) {
+				redirect("http://localhost:5173/login");
+			}
 		};
 
 		const getRecommendations = async () => {
@@ -67,14 +74,23 @@ export const Topsongs = ({ access_token }) => {
 			setRecommendations(hold);
 		};
 
-		getSongs();
-		if (songIDs.length > 0) {
-			getRecommendations();
+		if (access_token) {
+			getSongs();
+			if (songIDs.length > 0) {
+				getRecommendations();
+			}
 		}
 	}, [inputs, showRecommendation]);
 
 	return (
 		<div className="topsongs-conatiner">
+			{showModal && (
+				<Modal
+					closeModal={setShowModal}
+					access_token={access_token}
+					songToAdd={songToAdd}
+				/>
+			)}
 			<h1>My Top Songs</h1>
 			<div className="topsongs-form">
 				<form>
@@ -130,7 +146,12 @@ export const Topsongs = ({ access_token }) => {
 					recommendations.map((id, idx) => (
 						<div key={idx} className="song-item-recommendation">
 							<div className="song-add">
-								<button>
+								<button
+									onClick={() => {
+										setShowModal(true);
+										setSongToAdd(id);
+									}}
+								>
 									<h1>+</h1>
 								</button>
 							</div>

@@ -60,7 +60,7 @@
 	margin: auto;
 	justify-content: space-evenly;
 	align-items: center;
-	border: 2px solid #1db954;
+	border: 3px solid #1db954;
 }
 
 .song-iframe {
@@ -114,7 +114,7 @@
 	margin: auto;
 	justify-content: space-evenly;
 	align-items: center;
-	border: 2px solid #1db954;
+	border: 3px dashed #1db954;
 }
 
 .song-item-recommendation:hover h1 {
@@ -130,6 +130,32 @@
 	border: none;
 }
 
+.song-add button {
+	border-radius: 25% 15%;
+	overflow: hidden;
+	position: relative;
+	z-index: 0;
+	border: transparent;
+	scale: 0.7;
+}
+.song-add button::after {
+	background-color: #1b3123;
+	border-radius: 3rem 2rem;
+	content: "";
+	height: 100%;
+	width: 100%;
+	position: absolute;
+	left: 0;
+	top: 0;
+	transform: translate(-100%, 0) rotate(160deg);
+	transform-origin: top left;
+	transition: 0.2s;
+	z-index: -1;
+}
+.song-add button:hover::after {
+	transform: translate(0, 0);
+}
+
 .song-add h1 {
 	/* background-color: rgb(128, 156, 146); */
 	border-radius: 20px;
@@ -140,7 +166,8 @@
 	font-style: normal;
 	text-decoration: none;
 	transition: 0.2s;
-	
+	font-size: 80px;
+	padding: 0;
 }
 
 .song-add h1:hover {

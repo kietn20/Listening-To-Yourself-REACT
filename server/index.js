@@ -71,12 +71,12 @@ app.get('/callback', (req, res) => {
         res.redirect("http://localhost:5173/")
         // res.send(`<pre>${JSON.stringify(response.data, null, 2)}</pre>`);
     }).catch(error => {
-        res.send(error);
+        res.redirect("http://localhost:5173/")
     })
 });
 
 app.get('/refresh_token', (req, res) => {
-    const { refresh_token } = req.query;
+    const { refresh_token } = req.body.refresh_token;
 
     axios({
         method: 'post',
