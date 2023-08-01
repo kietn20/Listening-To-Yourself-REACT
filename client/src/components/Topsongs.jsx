@@ -2,9 +2,9 @@ import "./Topsongs.css";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { Modal } from "./Modal";
-import { redirect } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
-export const Topsongs = ({ access_token }) => {
+export const Topsongs = ({ access_token, setToken }) => {
 	const [inputs, setInputs] = useState({
 		limit: 5,
 		timeRange: "short_term",
@@ -14,6 +14,7 @@ export const Topsongs = ({ access_token }) => {
 	const [recommendations, setRecommendations] = useState([]);
 	const [showModal, setShowModal] = useState(false);
 	const [songToAdd, setSongToAdd] = useState("");
+	const navigate = useNavigate();
 
 	const handleChange = (event) => {
 		setInputs({
@@ -48,7 +49,9 @@ export const Topsongs = ({ access_token }) => {
 				});
 				setSongIds(hold);
 			} catch (error) {
-				redirect("http://localhost:5173/login");
+				setToken("");
+				console.log("access_token in error:", access_token);
+				navigate("/");
 			}
 		};
 
@@ -83,14 +86,7 @@ export const Topsongs = ({ access_token }) => {
 	}, [inputs, showRecommendation]);
 
 	return (
-		<div className="topsongs-conatiner">
-			{showModal && (
-				<Modal
-					closeModal={setShowModal}
-					access_token={access_token}
-					songToAdd={songToAdd}
-				/>
-			)}
+		<div id="topsongs-containerid" className="topsongs-conatiner">
 			<h1>My Top Songs</h1>
 			<div className="topsongs-form">
 				<form>
@@ -141,6 +137,13 @@ export const Topsongs = ({ access_token }) => {
 			<button className="show-button" onClick={handleClick}>
 				Get Recommendations For These Tracks
 			</button>
+			{showModal && (
+				<Modal
+					closeModal={setShowModal}
+					access_token={access_token}
+					songToAdd={songToAdd}
+				/>
+			)}
 			<div className="songs">
 				{showRecommendation &&
 					recommendations.map((id, idx) => (

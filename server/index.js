@@ -76,7 +76,7 @@ app.get('/callback', (req, res) => {
 });
 
 app.get('/refresh_token', (req, res) => {
-    const { refresh_token } = req.body.refresh_token;
+    const refresh_token = req.body.refresh_token;
 
     axios({
         method: 'post',
@@ -86,15 +86,16 @@ app.get('/refresh_token', (req, res) => {
             refresh_token: refresh_token
         }),
         headers: {
-            'content-type': 'application/x-www-form-urlencoded',
-            Authorization: `Basic ${new Buffer.from(`${CLIENT_ID}:${CLIENT_SECRET}`).toString('base64')}`,
+            'Content-Type': 'application/x-www-form-urlencoded',
+            Authorization: 'Basic ' + (new Buffer.from(CLIENT_ID + ":" + CLIENT_SECRET).toString('base64')),
         },
     })
         .then(response => {
+            access_token = response.data.access_token;
             res.send(response.data);
         })
         .catch(error => {
-            res.send(error);
+            res.send({ err: 'could not get refreshToken' });
         });
 });
 

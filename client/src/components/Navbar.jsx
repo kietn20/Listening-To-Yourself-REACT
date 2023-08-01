@@ -19,7 +19,13 @@ export const Navbar = ({ token }) => {
 					>
 						Top Songs
 					</Link>
-					<Link to="/moods">Moods</Link>
+					<Link
+						to={
+							token ? "/moods" : "http://localhost:3000/login"
+						}
+					>
+						Moods
+					</Link>
 					{token === "" ? (
 						<Link to="http://localhost:3000/login">Login</Link>
 					) : (

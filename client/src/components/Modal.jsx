@@ -2,37 +2,34 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import "./Modal.css";
 import { redirect } from "react-router-dom";
+import { FaWindowClose } from "react-icons/fa";
 
 export const Modal = ({ closeModal, access_token, songToAdd }) => {
-	const token = access_token;
-	console.log("access_token: ", token);
-	console.log("starting with: " + songToAdd);
 	const [playlists, setPlaylists] = useState([]);
 	const [chosenPlaylistID, setChosenPlaylistID] = useState("");
 
 	const handleChange = (event) => {
 		setChosenPlaylistID(event.target.value);
-		console.log("handleChange: chosenID is " + chosenPlaylistID);
 	};
 
 	const handleAdd = async (event) => {
 		event.preventDefault();
-		console.log("in handleAdd function");
-		const response = await axios.post(
-			`https://api.spotify.com/v1/playlists/${chosenPlaylistID}/tracks`,
-			{
-				headers: {
-					Authorization: `Bearer ${access_token}`,
-					"Content-Type": "application/json",
-				},
-				params: {
-					uris: [`spotify:track:${songToAdd}`],
-				},
-			}
-		);
-		console.log("statuscode: " + response.status);
-		console.log(response.data);
-		redirect("http://localhost:5173/");
+		await axios({
+			method: "post",
+			url: `https://api.spotify.com/v1/playlists/${chosenPlaylistID}/tracks`,
+			headers: { Authorization: `Bearer ${access_token}` },
+			data: {
+				uris: [`spotify:track:${songToAdd}`],
+			},
+		})
+			.then((response) => {
+				console.log(response.status);
+				closeModal(false);
+				redirect("http://localhost:5173/");
+			})
+			.catch((err) => {
+				console.log(err);
+			});
 	};
 
 	useEffect(() => {
@@ -56,10 +53,14 @@ export const Modal = ({ closeModal, access_token, songToAdd }) => {
 
 		getPlaylists();
 	}, []);
+
 	return (
 		<div className="modal-background">
 			<div className="modal-container">
-				<button onClick={() => closeModal(false)}>X</button>
+				<button className="closeButton" onClick={() => closeModal(false)}>
+					<FaWindowClose className="closeIcon"/>
+				</button>
+				<br />
 				<h2>Add Song to Playlist</h2>
 				<form>
 					<select
@@ -77,10 +78,10 @@ export const Modal = ({ closeModal, access_token, songToAdd }) => {
 						))}
 					</select>
 					<div className="modal-footer">
-						<button type="button" onClick={() => closeModal(false)}>
+						{/* <button className="closeForm" type="button" onClick={() => closeModal(false)}>
 							Close
-						</button>
-						<button onClick={handleAdd}>Add to playlist</button>
+						</button> */}
+						<button onClick={handleAdd}>Add</button>
 					</div>
 				</form>
 			</div>
