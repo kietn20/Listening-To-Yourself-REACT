@@ -175,10 +175,7 @@ export const Moods = ({ access_token, setToken, getRefreshToken }) => {
 						</div>
 					</div>
 					<div className="analysis-div">
-						<div
-							style={{ "background-image": url("./card2bg.svg") }}
-							className="card4 analysis-number"
-						>
+						<div className="card4 analysis-number">
 							<h1>{audio[3]}</h1>
 						</div>
 						<div className="analysis-text">
