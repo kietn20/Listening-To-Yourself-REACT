@@ -14,7 +14,7 @@ export const Home = () => {
 				</div>
 				<div className="cards-tiles">
 					<div className="card">
-						<img src="./src/assets/card1.png" alt="card 1" />
+						<img src="./card1.png" alt="card 1" />
 						<div className="card-description">
 							<Link to="/top-songs" className="home-links">
 								<h4>Get Your Top Songs</h4>
@@ -27,7 +27,7 @@ export const Home = () => {
 						</div>
 					</div>
 					<div className="card">
-						<img src="./src/assets/card2alt.jpg" alt="card 2" />
+						<img src="./card2alt.jpg" alt="card 2" />
 						<div className="card-description">
 							<Link to="/top-songs" className="home-links">
 								<h4>Enjoy New Recommendations</h4>
@@ -40,7 +40,7 @@ export const Home = () => {
 						</div>
 					</div>
 					<div className="card">
-						<img src="./src/assets/card3.jpg" alt="card 3" />
+						<img src="./card3.jpg" alt="card 3" />
 						<div className="card-description">
 							<Link to="/moods" className="home-links">
 								<h4>
