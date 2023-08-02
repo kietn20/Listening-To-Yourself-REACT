@@ -43,7 +43,7 @@ app.get('/login', (req, res) => {
     const queryParams = querystring.stringify({
         client_id: CLIENT_ID,
         response_type: 'code',
-        redirect_uri: REDIRECT_URI,
+        redirect_uri: 'https://listening-to-yourself.vercel.app/callback',
         state: state,
         scope: SCOPE,
         show_dialog: true
