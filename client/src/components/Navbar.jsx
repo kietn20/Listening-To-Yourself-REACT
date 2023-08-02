@@ -28,7 +28,7 @@ export const Navbar = ({ access_token }) => {
 		<div className="navbar">
 			<div className="navbar-leftside">
 				<a href="">
-					<img src="./assets/cat.png" alt="mylogo" />
+					<img src="./cat.png" alt="mylogo" />
 				</a>
 				<div className="navlinks">
 					<Link to="/">Home</Link>
