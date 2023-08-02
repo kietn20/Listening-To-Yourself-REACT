@@ -12,6 +12,18 @@ function App() {
 	const [token, setToken] = useState("");
 	const [refreshToken, setRefreshToken] = useState("");
 
+	const getToken = async () => {
+		try {
+			const response = await axios("http://localhost:3000/token");
+			setToken(response.data.access_token);
+			if (response.data.refreshToken) {
+				setRefreshToken(response.data.refresh_token);
+			}
+		} catch (error) {
+			console.log(error);
+		}
+	};
+
 	const getRefreshToken = async () => {
 		console.log("old access token:", token);
 		const response = await axios
@@ -20,26 +32,14 @@ function App() {
 					refresh_token: refreshToken,
 				},
 			})
-			.then((access_token) => {
-				console.log("new access_token:", access_token);
-				setToken(access_token);
+			.then(() => {
+				getToken();
+				console.log('new access_token:', token)
 			})
 			.catch((err) => console.log(err));
 	};
 
 	useEffect(() => {
-		const getToken = async () => {
-			try {
-				const response = await axios("http://localhost:3000/token");
-				setToken(response.data.access_token);
-				if (response.data.refreshToken) {
-					setRefreshToken(response.data.refresh_token);
-				}
-			} catch (error) {
-				console.log(error);
-			}
-		};
-
 		getToken();
 	}, [token, getRefreshToken]);
 
