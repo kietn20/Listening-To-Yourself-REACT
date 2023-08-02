@@ -109,4 +109,4 @@ app.get('/token', (req, res) => {
     );
 });
 
-app.listen(PORT, () => console.log('SERVER STARTED'));
+app.listen('https://listening-to-yourself-server.vercel.app/', () => console.log('SERVER STARTED'));
