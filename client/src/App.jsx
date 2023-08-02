@@ -8,13 +8,15 @@ import { Navbar } from "./components/Navbar";
 import { Topsongs } from "./components/Topsongs";
 import { Moods } from "./components/Moods";
 
+export const server = 'https://listening-to-yourself-server.vercel.app'
+
 function App() {
 	const [token, setToken] = useState("");
 	const [refreshToken, setRefreshToken] = useState("");
 
 	const getToken = async () => {
 		try {
-			const response = await axios("http://localhost:3000/token");
+			const response = await axios(`${server}/token`);
 			setToken(response.data.access_token);
 			if (response.data.refreshToken) {
 				setRefreshToken(response.data.refresh_token);
@@ -27,7 +29,7 @@ function App() {
 	const getRefreshToken = async () => {
 		console.log("old access token:", token);
 		const response = await axios
-			.get("http://localhost:3000/refresh_token", {
+			.get(`${server}/refresh_token`, {
 				data: {
 					refresh_token: refreshToken,
 				},

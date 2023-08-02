@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { BsSpotify } from "react-icons/bs";
 import axios from "axios";
 import { useEffect, useState } from "react";
+import { server } from "../App";
 
 export const Navbar = ({ access_token }) => {
 	const [displayName, setDisplayName] = useState("");
@@ -32,29 +33,17 @@ export const Navbar = ({ access_token }) => {
 				</a>
 				<div className="navlinks">
 					<Link to="/">Home</Link>
-					<Link
-						to={
-							access_token
-								? "/top-songs"
-								: "http://localhost:3000/login"
-						}
-					>
+					<Link to={access_token ? "/top-songs" : `${server}/login`}>
 						Top Songs
 					</Link>
-					<Link
-						to={
-							access_token
-								? "/moods"
-								: "http://localhost:3000/login"
-						}
-					>
+					<Link to={access_token ? "/moods" : `${server}/login`}>
 						Moods
 					</Link>
 				</div>
 			</div>
 			<div className="navbar-rightside">
 				{access_token === "" ? (
-					<Link to="http://localhost:3000/login">
+					<Link to={`${server}/login`}>
 						Login <BsSpotify className="spotifyIcon" />
 					</Link>
 				) : (
