@@ -70,7 +70,7 @@ app.get('/callback', (req, res) => {
     }).then(response => {
         access_token = response.data.access_token;
         // res.redirect("http://localhost:5173/")
-        res.redirect("https://listening-to-yourself.vercel.app/")
+        res.redirect("https://listening-to-yourself.vercel.app")
     }).catch(error => {
         // res.redirect("http://localhost:5173/")
         res.redirect("https://listening-to-yourself.vercel.app/")
