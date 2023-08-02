@@ -2,9 +2,9 @@ import "./Topsongs.css";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { Modal } from "./Modal";
-import { useNavigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
 
-export const Topsongs = ({ access_token, setToken }) => {
+export const Topsongs = ({ access_token, setToken, getRefreshToken }) => {
 	const [inputs, setInputs] = useState({
 		limit: 5,
 		timeRange: "short_term",
@@ -17,6 +17,7 @@ export const Topsongs = ({ access_token, setToken }) => {
 	const navigate = useNavigate();
 
 	const handleChange = (event) => {
+		setShowRecommendation(false);
 		setInputs({
 			...inputs,
 			[event.target.name]: event.target.value,
@@ -25,6 +26,28 @@ export const Topsongs = ({ access_token, setToken }) => {
 
 	const handleClick = (event) => {
 		setShowRecommendation(!showRecommendation);
+	};
+
+	const getRecommendations = async () => {
+		const seed_tracks = songIDs.splice(0, 5).join(",");
+		const response = await axios.get(
+			"https://api.spotify.com/v1/recommendations",
+			{
+				headers: {
+					Authorization: `Bearer ${access_token}`,
+					"Content-Type": "application/json",
+				},
+				params: {
+					limit: 10,
+					seed_tracks: seed_tracks,
+				},
+			}
+		);
+		const hold = [];
+		response.data.tracks.forEach((item) => {
+			hold.push(item.id);
+		});
+		setRecommendations(hold);
 	};
 
 	useEffect(() => {
@@ -44,45 +67,22 @@ export const Topsongs = ({ access_token, setToken }) => {
 					}
 				);
 				const hold = [];
-				await response.data.items.forEach((item) => {
+				response.data.items.forEach((item) => {
 					hold.push(item.id);
 				});
 				setSongIds(hold);
-			} catch (error) {
-				setToken("");
-				console.log("access_token in error:", access_token);
-				navigate("/");
-			}
-		};
-
-		const getRecommendations = async () => {
-			const seed_tracks = songIDs.splice(0, 5).join(",");
-			const response = await axios.get(
-				"https://api.spotify.com/v1/recommendations",
-				{
-					headers: {
-						Authorization: `Bearer ${access_token}`,
-						"Content-Type": "application/json",
-					},
-					params: {
-						limit: 10,
-						seed_tracks: seed_tracks,
-					},
+			} catch (err) {
+				if (err.response.data.error.status == 401) {
+					getRefreshToken();
+				} else {
+					setToken("");
+					navigate("/");
 				}
-			);
-			const hold = [];
-			await response.data.tracks.forEach((item) => {
-				hold.push(item.id);
-			});
-			setRecommendations(hold);
+			}
 		};
 
-		if (access_token) {
-			getSongs();
-			if (songIDs.length > 0) {
-				getRecommendations();
-			}
-		}
+		getSongs();
+		if (songIDs.length > 0) getRecommendations();
 	}, [inputs, showRecommendation]);
 
 	return (

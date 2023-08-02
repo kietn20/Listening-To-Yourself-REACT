@@ -4,10 +4,10 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
-export const Moods = ({ access_token, setToken }) => {
+export const Moods = ({ access_token, setToken, getRefreshToken }) => {
 	const [songObjects, setSongObjects] = useState([]);
 	const [ids, setIds] = useState([]);
-	let audio = [];
+	const [audio, setAudio] = useState([0, 0, 0, 0, 0]);
 	const navigate = useNavigate();
 
 	const getSongs = async () => {
@@ -26,57 +26,72 @@ export const Moods = ({ access_token, setToken }) => {
 				}
 			);
 			const hold = [];
-			await response.data.items.forEach((songObject) => {
+			const holdIDs = [];
+			response.data.items.forEach((songObject) => {
 				hold.push(songObject);
-				ids.push(songObject.id);
+				holdIDs.push(songObject.id);
 			});
 			setSongObjects(hold);
-		} catch (error) {
-			console.error(error);
+			setIds(holdIDs);
+			getAnalysis(holdIDs.join(","));
+		} catch (err) {
+			if (err.response.data.error.status == 401) {
+				getRefreshToken();
+			} else {
+				setToken("");
+				navigate("/");
+			}
 		}
 	};
 
-	const getAnalysis = async () => {
-		try {
-			const response = await axios.get(
-				"https://api.spotify.com/v1/audio-features",
-				{
-					headers: {
-						Authorization: `Bearer ${access_token}`,
-						"Content-Type": "application/json",
-					},
-					params: {
-						ids: ids.join(","),
-					},
+	const getAnalysis = (idsString) => {
+		let acousticness = 0;
+		let danceability = 0;
+		let energy = 0;
+		let instrumentalness = 0;
+		let valence = 0;
+		const response = axios
+			.get("https://api.spotify.com/v1/audio-features", {
+				headers: {
+					Authorization: `Bearer ${access_token}`,
+					"Content-Type": "application/json",
+				},
+				params: {
+					ids: idsString,
+				},
+			})
+			.then((response) => {
+				for (let i = 0; i < 5; i++) {
+					acousticness +=
+						response.data.audio_features[i].acousticness;
+					danceability +=
+						response.data.audio_features[i].danceability;
+					energy += response.data.audio_features[i].energy;
+					instrumentalness +=
+						response.data.audio_features[i].instrumentalness;
+					valence += response.data.audio_features[i].valence;
 				}
-			);
-			console.log(response);
-			var one = 0;
-			var two = 0;
-			var three = 0;
-			var four = 0;
-			var five = 0;
-			await response.data.audio_features.forEach((element) => {
-				one += element.acousticness;
-				two += element.danceability;
-				three += element.energy;
-				four += element.instrumentalness;
-				five += element.valence;
+
+				setAudio([
+					(acousticness / 5).toFixed(2),
+					(danceability / 5).toFixed(2),
+					(energy / 5).toFixed(2),
+					(instrumentalness / 5).toFixed(2),
+					(valence / 5).toFixed(2),
+				]);
+			})
+			.catch((error) => {
+				console.error(error);
 			});
-			audio = [one, two, three, four, five];
-		} catch (error) {
-			console.error(error);
-		}
 	};
+
 	useEffect(() => {
 		getSongs();
-		getAnalysis();
-	}, [song]);
+	}, []);
 
 	return (
 		<div className="moods-container">
 			<div className="moods-content">
-				<h1>{audio.join(",")}</h1>
 				<h1>Moods of Your Recent Favorites</h1>
 				<div className="moods-covers">
 					{songObjects.map((song, index) => (
@@ -89,15 +104,25 @@ export const Moods = ({ access_token, setToken }) => {
 									src={song.album.images[1].url}
 									alt={song.album.images[1].url}
 								/>
+								<img
+									className="record"
+									src="./src/assets/record.png"
+									alt="record"
+								/>
 							</a>
-							<h4>{song.name}</h4>
+							<a
+								href={song.external_urls.spotify}
+								target="_blank"
+							>
+								<h4>{song.name}</h4>
+							</a>
 						</div>
 					))}
 				</div>
 				<div className="moods-analysis">
 					<div className="analysis-div">
 						<div className="card1 analysis-number">
-							<h1>{(audio[0] / 5).toFixed(2)}</h1>
+							<h1>{audio[0]}</h1>
 						</div>
 						<div className="analysis-text">
 							<h1>Acousticness</h1>
@@ -112,7 +137,7 @@ export const Moods = ({ access_token, setToken }) => {
 					</div>
 					<div className="analysis-div">
 						<div className="card2 analysis-number">
-							<h1>{(audio[1] / 5).toFixed(2)}</h1>
+							<h1>{audio[1]}</h1>
 						</div>
 						<div className="analysis-text">
 							<h1>Danceability</h1>
@@ -128,7 +153,7 @@ export const Moods = ({ access_token, setToken }) => {
 					</div>
 					<div className="analysis-div">
 						<div className="card3 analysis-number">
-							<h1>{(audio[2] / 5).toFixed(2)}</h1>
+							<h1>{audio[2]}</h1>
 						</div>
 						<div className="analysis-text">
 							<h1>Energy</h1>
@@ -151,7 +176,7 @@ export const Moods = ({ access_token, setToken }) => {
 					</div>
 					<div className="analysis-div">
 						<div className="card4 analysis-number">
-							<h1>{(audio[3] / 5).toFixed(2)}</h1>
+							<h1>{audio[3]}</h1>
 						</div>
 						<div className="analysis-text">
 							<h1>Instrumentalness</h1>
@@ -170,7 +195,7 @@ export const Moods = ({ access_token, setToken }) => {
 					</div>
 					<div className="analysis-div">
 						<div className="card5 analysis-number">
-							<h1>{(audio[4] / 5).toFixed(2)}</h1>
+							<h1>{audio[4]}</h1>
 						</div>
 						<div className="analysis-text">
 							<h1>Valence</h1>

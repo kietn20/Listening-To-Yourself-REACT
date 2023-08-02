@@ -1,8 +1,5 @@
-import { redirect, useSearchParams, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import "./Home.css";
-import axios from "axios";
-import { useEffect } from "react";
-import { Navbar } from "./Navbar";
 
 export const Home = () => {
 	return (

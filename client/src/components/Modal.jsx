@@ -23,7 +23,6 @@ export const Modal = ({ closeModal, access_token, songToAdd }) => {
 			},
 		})
 			.then((response) => {
-				console.log(response.status);
 				closeModal(false);
 				redirect("http://localhost:5173/");
 			})

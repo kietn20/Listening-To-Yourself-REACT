@@ -1,37 +1,67 @@
 .navbar {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    background-color: #191414;
-    color: white;
-    padding: 0 4rem;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	background-color: #191414;
+	color: white;
+	padding: 0 4rem;
 	margin: 0;
 }
 
 .navbar-leftside {
-    display: flex;
-    align-items: center;
-    gap: 4rem;
+	display: flex;
+	align-items: center;
+	gap: 4rem;
 }
 
 .navbar-leftside a {
-    color: white;
-    text-decoration: none;
-    font-weight: 600;
+	color: white;
+	text-decoration: none;
+	font-weight: 600;
 }
 
-.navbar-leftside  img {
-    width: 40px;
-    height: auto;
-    padding-top: 3px;
+.navbar-leftside img {
+	width: 40px;
+	height: auto;
+	padding-top: 3px;
 }
 
 .navlinks {
-    display: flex;
-    gap: 2rem;
+	display: flex;
+	gap: 2rem;
 }
 
 .navlinks a:hover {
-    color: #1DB954;
-    transition: 0.4s;
+	color: #1db954;
+	transition: 0.4s;
+}
+
+.navbar-rightside:hover {
+	transition: 0.3s;
+	color: #1db954;
+}
+
+.navbar-rightside a {
+	text-decoration: none;
+	color: white;
+	font-weight: 600;
+	display: flex;
+	align-items: center;
+	gap: 0.5rem;
+}
+
+.navbar-rightside a:hover {
+	transition: 0.3s;
+	color: #1db954;
+}
+
+.spotifyIcon {
+	font-size: 20px;
+}
+
+.displayName {
+	display: flex;
+	align-items: center;
+	gap: 0.5rem;
+	color: #1db954;
 }
