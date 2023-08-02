@@ -151,27 +151,27 @@
 }
 
 .card1 {
-	background-image: url("./assets/card1bg.svg");
+	background-image: url("./src/assets/card1bg.svg");
 	background-size: cover;
 	border-radius: 10px;
 }
 .card2 {
-	background-image: url("./assets/card2bg.svg");
+	background-image: url("./src/assets/card2bg.svg");
 	background-size: cover;
 	border-radius: 10px;
 }
 .card3 {
-	background-image: url("./assets/card3bg.svg");
+	background-image: url("./src/assets/card3bg.svg");
 	background-size: cover;
 	border-radius: 10px;
 }
 .card4 {
-	background-image: url("./assets/card4bg.svg");
+	background-image: url("./src/assets/card4bg.svg");
 	background-size: cover;
 	border-radius: 10px;
 }
 .card5 {
-	background-image: url("./assets/card5bg.svg");
+	background-image: url("./src/assets/card5bg.svg");
 	background-size: cover;
 	border-radius: 10px;
 }
