@@ -10,7 +10,8 @@ const PORT = 3000;
 const CLIENT_ID = process.env.CLIENTID;
 const CLIENT_SECRET = process.env.CLIENTSECRET;
 
-const REDIRECT_URI = 'http://localhost:3000/callback';
+// const REDIRECT_URI = 'http://localhost:3000/callback';
+const REDIRECT_URI = 'https://listening-to-yourself.vercel.app/callback';
 const SPOTIFY_AUTH_URL = 'https://accounts.spotify.com/authorize?'
 const SCOPE = "user-top-read playlist-modify-public playlist-modify-private user-read-private user-read-email playlist-read-private playlist-read-collaborative"
 
@@ -92,10 +93,9 @@ app.get('/refresh_token', (req, res) => {
     })
         .then(response => {
             access_token = response.data.access_token;
-            res.send(response.data);
         })
         .catch(error => {
-            res.send({ err: 'could not get refreshToken' });
+            res.send(error);
         });
 });
 
