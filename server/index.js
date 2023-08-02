@@ -10,8 +10,8 @@ const PORT = 3000;
 const CLIENT_ID = process.env.CLIENTID;
 const CLIENT_SECRET = process.env.CLIENTSECRET;
 
-// const REDIRECT_URI = 'http://localhost:3000/callback';
-const REDIRECT_URI = 'https://listening-to-yourself.vercel.app/callback';
+const REDIRECT_URI = 'http://localhost:3000/callback';
+// const REDIRECT_URI = 'https://listening-to-yourself.vercel.app/callback';
 const SPOTIFY_AUTH_URL = 'https://accounts.spotify.com/authorize?'
 const SCOPE = "user-top-read playlist-modify-public playlist-modify-private user-read-private user-read-email playlist-read-private playlist-read-collaborative"
 
@@ -43,7 +43,7 @@ app.get('/login', (req, res) => {
     const queryParams = querystring.stringify({
         client_id: CLIENT_ID,
         response_type: 'code',
-        redirect_uri: 'https://listening-to-yourself.vercel.app/callback',
+        redirect_uri: REDIRECT_URI,
         state: state,
         scope: SCOPE,
         show_dialog: true
@@ -70,10 +70,11 @@ app.get('/callback', (req, res) => {
     }).then(response => {
         access_token = response.data.access_token;
         // res.redirect("http://localhost:5173/")
-        res.redirect("https://listening-to-yourself.vercel.app")
+        res.redirect("https://listening-to-yourself.vercel.app/")
     }).catch(error => {
         // res.redirect("http://localhost:5173/")
-        res.redirect("https://listening-to-yourself.vercel.app/")
+        res.send('You are not in the authorized list. Please contact @kite for permission to enter.')
+        // res.redirect("https://listening-to-yourself.vercel.app/")
 
     })
 });

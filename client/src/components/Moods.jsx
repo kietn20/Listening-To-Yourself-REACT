@@ -106,7 +106,7 @@ export const Moods = ({ access_token, setToken, getRefreshToken }) => {
 								/>
 								<img
 									className="record"
-									src="./src/assets/record.png"
+									src="./record.png"
 									alt="record"
 								/>
 							</a>

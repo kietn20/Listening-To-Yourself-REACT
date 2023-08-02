@@ -94,7 +94,7 @@ export const Topsongs = ({ access_token, setToken, getRefreshToken }) => {
 						name="limit"
 						required
 						onChange={handleChange}
-						defaultValue={"# of Songs"}
+						defaultValue={"5"}
 					>
 						<option disabled># of Songs</option>
 						<option value={5}>Five</option>
@@ -106,7 +106,7 @@ export const Topsongs = ({ access_token, setToken, getRefreshToken }) => {
 						name="timeRange"
 						required
 						onChange={handleChange}
-						defaultValue={"Time Period"}
+						defaultValue={"30 Days"}
 					>
 						<option disabled>Time Period</option>
 						<option value="short_term">30 Days</option>
