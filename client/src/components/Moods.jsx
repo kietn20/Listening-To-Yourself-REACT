@@ -4,6 +4,10 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
+const bg = {
+	"background-image": url("./card2bg.svg"),
+};
+
 export const Moods = ({ access_token, setToken, getRefreshToken }) => {
 	const [songObjects, setSongObjects] = useState([]);
 	const [ids, setIds] = useState([]);
@@ -152,7 +156,7 @@ export const Moods = ({ access_token, setToken, getRefreshToken }) => {
 						</div>
 					</div>
 					<div className="analysis-div">
-						<div className="card3 analysis-number">
+						<div style={bg} className="card3 analysis-number">
 							<h1>{audio[2]}</h1>
 						</div>
 						<div className="analysis-text">
@@ -175,7 +179,10 @@ export const Moods = ({ access_token, setToken, getRefreshToken }) => {
 						</div>
 					</div>
 					<div className="analysis-div">
-						<div className="card4 analysis-number">
+						<div
+							style={{ "background-image": url("./card2bg.svg") }}
+							className="card4 analysis-number"
+						>
 							<h1>{audio[3]}</h1>
 						</div>
 						<div className="analysis-text">
