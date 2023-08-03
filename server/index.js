@@ -35,7 +35,8 @@ app.use(session({
     saveUninitialized: false
 }))
 
-global.access_token = '';
+// global.access_token = '';
+session.access_token = '';
 
 app.get('/', (req, res) => {
     res.send('Hello World');
@@ -76,7 +77,7 @@ app.get('/callback', (req, res) => {
             'Content-Type': 'application/x-www-form-urlencoded',
         }
     }).then(response => {
-        access_token = response.data.access_token;
+        // access_token = response.data.access_token;
         req.session.access_token = access_token;
         // res.redirect("http://localhost:5173/")
         res.redirect("https://listening-to-yourself.vercel.app/")
@@ -114,7 +115,7 @@ app.get('/refresh_token', (req, res) => {
 app.get('/token', (req, res) => {
     res.json(
         {
-            access_token: access_token
+            access_token: session.access_token
         }
     );
 });
