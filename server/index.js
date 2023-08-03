@@ -77,10 +77,11 @@ app.get('/callback', (req, res) => {
         }
     }).then(response => {
         access_token = response.data.access_token;
-        res.session.access_token = access_token;
+        req.session.access_token = access_token;
         // res.redirect("http://localhost:5173/")
         res.redirect("https://listening-to-yourself.vercel.app/")
     }).catch(error => {
+        res.send(error)
         // res.redirect("http://localhost:5173/")
         res.send('You are not in the authorized list. Please contact @kite for permission to enter.')
         // res.redirect("https://listening-to-yourself.vercel.app/")
