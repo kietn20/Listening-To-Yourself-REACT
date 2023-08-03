@@ -4,6 +4,9 @@ import cors from "cors";
 import querystring from "querystring"
 import 'dotenv/config';
 
+sessionStorage.clear();
+localStorage.clear();
+
 const PORT = 3000;
 
 const CLIENT_ID = process.env.CLIENTID;

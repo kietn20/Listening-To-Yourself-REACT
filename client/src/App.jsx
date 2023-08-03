@@ -10,6 +10,9 @@ import { Moods } from "./components/Moods";
 
 export const server = 'https://listening-to-yourself-server.vercel.app'
 
+sessionStorage.clear();
+localStorage.clear();
+
 function App() {
 	const [token, setToken] = useState("");
 	const [refreshToken, setRefreshToken] = useState("");
