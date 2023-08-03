@@ -4,8 +4,8 @@ import cors from "cors";
 import querystring from "querystring"
 import 'dotenv/config';
 
-sessionStorage.clear();
-localStorage.clear();
+// sessionStorage.clear();
+// localStorage.clear();
 
 const PORT = 3000;
 
