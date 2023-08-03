@@ -28,9 +28,9 @@ export const Navbar = ({ access_token }) => {
 	return (
 		<div className="navbar">
 			<div className="navbar-leftside">
-				<a href="">
-					<img src="./cat.png" alt="mylogo" />
-				</a>
+				<Link to="/">
+					<img className="logo" src="./LISTEN.svg" alt="mylogo" />
+				</Link>
 				<div className="navlinks">
 					<Link to="/">Home</Link>
 					<Link to={access_token ? "/top-songs" : `${server}/login`}>

@@ -18,12 +18,13 @@
 	color: white;
 	text-decoration: none;
 	font-weight: 600;
+
 }
 
 .navbar-leftside img {
-	width: 40px;
+	width: 100px;
 	height: auto;
-	padding-top: 3px;
+	padding-top: 6px;
 }
 
 .navlinks {
