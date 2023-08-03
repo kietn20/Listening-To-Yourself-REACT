@@ -3,9 +3,8 @@ import axios from "axios";
 import cors from "cors";
 import querystring from "querystring"
 import 'dotenv/config';
+import session from "express-session"
 
-// sessionStorage.clear();
-// localStorage.clear();
 
 const PORT = 3000;
 
@@ -29,6 +28,12 @@ const generateRandomString = function (length) {
 
 const app = express();
 app.use(cors());
+app.use(session({
+    secret: "sadDASDasdaQsdDASasdag0u0ud0THYKYasdadDDuu1eu0qASDADADSn0eu0qwASJeqfg",
+    cookie: { maxAge: 3600000 },
+    resave: false,
+    saveUninitialized: false
+}))
 
 global.access_token = '';
 
@@ -39,6 +44,7 @@ app.get('/', (req, res) => {
 const stateKey = 'spotify_auth_state';
 
 app.get('/login', (req, res) => {
+    req.session.destroy();
     var state = generateRandomString(16);
     res.cookie(stateKey, state);
 
@@ -71,13 +77,13 @@ app.get('/callback', (req, res) => {
         }
     }).then(response => {
         access_token = response.data.access_token;
+        res.session.access_token = access_token;
         // res.redirect("http://localhost:5173/")
         res.redirect("https://listening-to-yourself.vercel.app/")
     }).catch(error => {
         // res.redirect("http://localhost:5173/")
         res.send('You are not in the authorized list. Please contact @kite for permission to enter.')
         // res.redirect("https://listening-to-yourself.vercel.app/")
-
     })
 });
 

@@ -6,12 +6,9 @@ import { Home } from "./components/Home.jsx";
 import { Login } from "./components/Login.jsx";
 import { Navbar } from "./components/Navbar";
 import { Topsongs } from "./components/Topsongs";
-import { Moods } from "./components/Moods";
+import { Moods } from "./components/Moods";	
 
 export const server = 'https://listening-to-yourself-server.vercel.app'
-
-sessionStorage.clear();
-localStorage.clear();
 
 function App() {
 	const [token, setToken] = useState("");
