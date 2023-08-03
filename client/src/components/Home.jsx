@@ -55,6 +55,7 @@ export const Home = () => {
 						</div>
 					</div>
 				</div>
+				<h5>~ Made for Spotify ~</h5>
 			</div>
 		</div>
 	);

@@ -92,7 +92,12 @@ export const Moods = ({ access_token, setToken, getRefreshToken }) => {
 	return (
 		<div className="moods-container">
 			<div className="moods-content">
-				<h1>Moods of Your Recent Favorites</h1>
+				{/* <h1>Moods of Your Recent Favorites</h1> */}
+				<img
+					className="SpotifyLogo"
+					src="./Spotify_LogoBlackWhite.png"
+					alt="Spotify Logo"
+				/>
 				<div className="moods-covers">
 					{songObjects.map((song, index) => (
 						<div className="cover" key={index}>
@@ -100,15 +105,18 @@ export const Moods = ({ access_token, setToken, getRefreshToken }) => {
 								href={song.external_urls.spotify}
 								target="_blank"
 							>
-								<img
-									src={song.album.images[1].url}
-									alt={song.album.images[1].url}
-								/>
-								<img
-									className="record"
-									src="./record.png"
-									alt="record"
-								/>
+								<div>
+									<img
+										className="cover-image"
+										src={song.album.images[1].url}
+										alt={song.album.images[1].url}
+									/>
+									<img
+										className="record"
+										src="./record.png"
+										alt="record"
+									/>
+								</div>
 							</a>
 							<a
 								href={song.external_urls.spotify}
@@ -119,10 +127,16 @@ export const Moods = ({ access_token, setToken, getRefreshToken }) => {
 						</div>
 					))}
 				</div>
+				<h1>Moods of Your Recent Favorites</h1>
 				<div className="moods-analysis">
 					<div className="analysis-div">
 						<div className="card1 analysis-number">
 							<h1>{audio[0]}</h1>
+							<img
+								className="SpotifyLogo-analysis-number"
+								src="./Spotify_LogoBlackWhite.png"
+								alt=""
+							/>
 						</div>
 						<div className="analysis-text">
 							<h1>Acousticness</h1>
@@ -138,6 +152,11 @@ export const Moods = ({ access_token, setToken, getRefreshToken }) => {
 					<div className="analysis-div">
 						<div className="card2 analysis-number">
 							<h1>{audio[1]}</h1>
+							<img
+								className="SpotifyLogo-analysis-number"
+								src="./Spotify_LogoBlackWhite.png"
+								alt=""
+							/>
 						</div>
 						<div className="analysis-text">
 							<h1>Danceability</h1>
@@ -154,6 +173,11 @@ export const Moods = ({ access_token, setToken, getRefreshToken }) => {
 					<div className="analysis-div">
 						<div className="card3 analysis-number">
 							<h1>{audio[2]}</h1>
+							<img
+								className="SpotifyLogo-analysis-number"
+								src="./Spotify_LogoBlackWhite.png"
+								alt=""
+							/>
 						</div>
 						<div className="analysis-text">
 							<h1>Energy</h1>
@@ -177,6 +201,11 @@ export const Moods = ({ access_token, setToken, getRefreshToken }) => {
 					<div className="analysis-div">
 						<div className="card4 analysis-number">
 							<h1>{audio[3]}</h1>
+							<img
+								className="SpotifyLogo-analysis-number"
+								src="./Spotify_LogoBlackWhite.png"
+								alt=""
+							/>
 						</div>
 						<div className="analysis-text">
 							<h1>Instrumentalness</h1>
@@ -196,6 +225,11 @@ export const Moods = ({ access_token, setToken, getRefreshToken }) => {
 					<div className="analysis-div">
 						<div className="card5 analysis-number">
 							<h1>{audio[4]}</h1>
+							<img
+								className="SpotifyLogo-analysis-number"
+								src="./Spotify_LogoBlackWhite.png"
+								alt=""
+							/>
 						</div>
 						<div className="analysis-text">
 							<h1>Valence</h1>
