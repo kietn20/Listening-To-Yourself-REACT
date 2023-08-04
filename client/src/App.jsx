@@ -49,7 +49,7 @@ function App(req, res) {
 		setToken(URLparams.get("token"));
 		sessionStorage.setItem("token", token);
 		console.log("useState token:", token);
-		console.log("session's token:", sessionStorage.get("token"));
+		console.log("session's token:", sessionStorage.getItem("token"));
 		// sessionStorage.setItem("access_token", req?.query.access_token);
 	}, []);
 
