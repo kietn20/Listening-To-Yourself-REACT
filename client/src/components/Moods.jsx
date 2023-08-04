@@ -105,7 +105,7 @@ export const Moods = ({ access_token, setToken, getRefreshToken }) => {
 								href={song.external_urls.spotify}
 								target="_blank"
 							>
-								<div>
+								<div className="cover-image-div">
 									<img
 										className="cover-image"
 										src={song.album.images[1].url}
