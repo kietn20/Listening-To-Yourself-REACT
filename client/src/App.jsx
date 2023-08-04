@@ -11,8 +11,6 @@ import { Moods } from "./components/Moods";
 export const server = "https://listening-to-yourself-server.vercel.app";
 
 function App(req, res) {
-	console.log(req.query);
-	sessionStorage.setItem("access_token", req.query.access_token);
 	const [token, setToken] = useState("");
 	const [refreshToken, setRefreshToken] = useState("");
 
@@ -45,9 +43,9 @@ function App(req, res) {
 	// };
 
 	useEffect(() => {
-		console.log(req.query);
-		sessionStorage.setItem("access_token", req.query.access_token);
-	}, [req.query]);
+		console.log(req?.query);
+		// sessionStorage.setItem("access_token", req?.query.access_token);
+	}, []);
 
 	return (
 		<div className="App">
