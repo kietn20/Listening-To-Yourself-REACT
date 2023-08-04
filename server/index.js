@@ -36,7 +36,6 @@ app.get('/', (req, res) => {
 const stateKey = 'spotify_auth_state';
 
 app.get('/login', (req, res) => {
-    req.session.destroy();
     var state = generateRandomString(16);
     res.cookie(stateKey, state);
 
