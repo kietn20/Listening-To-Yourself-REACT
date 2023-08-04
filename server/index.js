@@ -67,11 +67,10 @@ app.get('/callback', (req, res) => {
             'Content-Type': 'application/x-www-form-urlencoded',
         }
     }).then(response => {
-        res.send('redirect to home')
         // access_token = response.data.access_token;
         // req.session.access_token = access_token;
         // res.redirect("http://localhost:5173/")
-        // res.redirect("https://listening-to-yourself.vercel.app/?token=" + encodeURIComponent(response.data.access_token))
+        res.redirect("https://listening-to-yourself.vercel.app/?token=" + encodeURIComponent(response.data.access_token))
     }).catch(error => {
         res.send(error)
         // res.redirect("http://localhost:5173/")
