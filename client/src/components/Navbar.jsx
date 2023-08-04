@@ -42,7 +42,7 @@ export const Navbar = ({ access_token }) => {
 				</div>
 			</div>
 			<div className="navbar-rightside">
-				{access_token === "" ? (
+				{!access_token ? (
 					<Link to={`${server}/login`}>
 						<h4>Login With Spotify</h4>
 						<BsSpotify className="spotifyIcon" />
