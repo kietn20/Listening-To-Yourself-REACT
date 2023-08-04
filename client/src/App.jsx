@@ -46,6 +46,8 @@ function App(req, res) {
 		const URLparams = new URLSearchParams(window.location.search);
 		console.log(URLparams);
 		console.log(URLparams.get("token"));
+		const token = URLparams.get("token");
+		sessionStorage.setItem("token", token);
 		// sessionStorage.setItem("access_token", req?.query.access_token);
 	}, []);
 
