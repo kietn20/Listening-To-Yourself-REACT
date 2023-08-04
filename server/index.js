@@ -3,8 +3,6 @@ import axios from "axios";
 import cors from "cors";
 import querystring from "querystring"
 import 'dotenv/config';
-import session from "express-session";
-
 
 const PORT = 3000;
 

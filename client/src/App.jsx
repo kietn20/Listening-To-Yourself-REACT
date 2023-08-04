@@ -11,7 +11,7 @@ import { Moods } from "./components/Moods";
 export const server = "https://listening-to-yourself-server.vercel.app";
 
 function App(req, res) {
-	console.log(req.query);
+	// console.log(req.query);
 	const [token, setToken] = useState("");
 	const [refreshToken, setRefreshToken] = useState("");
 
