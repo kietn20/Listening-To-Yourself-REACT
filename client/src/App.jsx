@@ -43,7 +43,9 @@ function App(req, res) {
 	// };
 
 	useEffect(() => {
-		console.log(req?.query);
+		const URLparams = new URLSearchParams(window.location.search);
+		console.log(URLparams);
+		console.log(URLparams.get("token"));
 		// sessionStorage.setItem("access_token", req?.query.access_token);
 	}, []);
 
