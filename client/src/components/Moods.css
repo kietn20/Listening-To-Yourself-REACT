@@ -62,7 +62,7 @@
 	z-index: 1;
 }
 
-.moods-covers a .record {
+.record {
 	position: absolute;
 	left: -5px;
 	bottom: 10px;
@@ -70,7 +70,7 @@
 	border: none;
 }
 
-.moods-covers a .record:hover {
+.record:hover {
 	border: none;
 }
 
@@ -84,7 +84,7 @@
 }
 
 .cover {
-	/* background-color: rgb(255, 99, 71, 0.5); */
+	background-color: rgb(255, 99, 71, 0.5);
 	text-align: center;
 	flex-wrap: wrap;
 	flex-basis: 20%;
