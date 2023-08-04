@@ -28,15 +28,8 @@ const generateRandomString = function (length) {
 
 const app = express();
 app.use(cors());
-// app.use(session({
-//     secret: "sadDASDasdaQsdDASasdag0u0ud0THYKYasdadDDuu1eu0qASDADADSn0eu0qwASJeqfg",
-//     cookie: { maxAge: 3600000 },
-//     resave: false,
-//     saveUninitialized: false
-// }))
 
-// global.access_token = '';
-// session.access_token = '';
+global.access_token = '';
 
 app.get('/', (req, res) => {
     res.send('Hello World');
@@ -77,10 +70,10 @@ app.get('/callback', (req, res) => {
             'Content-Type': 'application/x-www-form-urlencoded',
         }
     }).then(response => {
-        // access_token = response.data.access_token;
+        access_token = response.data.access_token;
         // req.session.access_token = access_token;
         // res.redirect("http://localhost:5173/")
-        res.redirect("https://listening-to-yourself.vercel.app/?token=" + encodeURIComponent(response.data.access_token))
+        res.redirect("https://listening-to-yourself.vercel.app/")
     }).catch(error => {
         res.send(error)
         // res.redirect("http://localhost:5173/")
@@ -89,35 +82,36 @@ app.get('/callback', (req, res) => {
     })
 });
 
-// app.get('/refresh_token', (req, res) => {
-//     const refresh_token = req.body.refresh_token;
+app.get('/refresh_token', (req, res) => {
+    const refresh_token = req.body.refresh_token;
 
-//     axios({
-//         method: 'post',
-//         url: 'https://accounts.spotify.com/api/token',
-//         data: querystring.stringify({
-//             grant_type: 'refresh_token',
-//             refresh_token: refresh_token
-//         }),
-//         headers: {
-//             'Content-Type': 'application/x-www-form-urlencoded',
-//             Authorization: 'Basic ' + (new Buffer.from(CLIENT_ID + ":" + CLIENT_SECRET).toString('base64')),
-//         },
-//     })
-//         .then(response => {
-//             access_token = response.data.access_token;
-//         })
-//         .catch(error => {
-//             res.send(error);
-//         });
-// });
+    axios({
+        method: 'post',
+        url: 'https://accounts.spotify.com/api/token',
+        data: querystring.stringify({
+            grant_type: 'refresh_token',
+            refresh_token: refresh_token
+        }),
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+            Authorization: 'Basic ' + (new Buffer.from(CLIENT_ID + ":" + CLIENT_SECRET).toString('base64')),
+        },
+    })
+        .then(response => {
+            access_token = response.data.access_token;
+        })
+        .catch(error => {
+            res.send(error);
+        });
+});
 
-// app.get('/token', (req, res) => {
-//     res.json(
-//         {
-//             access_token: access_token
-//         }
-//     );
-// });
+app.get('/token', (req, res) => {
+    res.json(
+        {
+            access_token: access_token
+        }
+    );
+});
 
-app.listen('https://listening-to-yourself-server.vercel.app/', () => console.log('SERVER STARTED'));
+// app.listen('https://listening-to-yourself-server.vercel.app/', () => console.log('SERVER STARTED'));
+app.listen(PORT, () => console.log('SERVER STARTED'));

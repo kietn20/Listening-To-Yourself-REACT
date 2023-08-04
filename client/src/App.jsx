@@ -15,38 +15,38 @@ function App(req, res) {
 	const [token, setToken] = useState("");
 	const [refreshToken, setRefreshToken] = useState("");
 
-	const getToken = async () => {
-		try {
-			const response = await axios(`${server}/token`);
-			setToken(response.data.access_token);
-			localStorage.setItem();
-			if (response.data.refreshToken) {
-				setRefreshToken(response.data.refresh_token);
-			}
-		} catch (error) {
-			console.log(error);
-		}
-	};
+	// const getToken = async () => {
+	// 	try {
+	// 		const response = await axios(`${server}/token`);
+	// 		setToken(response.data.access_token);
+	// 		localStorage.setItem();
+	// 		if (response.data.refreshToken) {
+	// 			setRefreshToken(response.data.refresh_token);
+	// 		}
+	// 	} catch (error) {
+	// 		console.log(error);
+	// 	}
+	// };
 
-	const getRefreshToken = async () => {
-		console.log("old access token:", token);
-		const response = await axios
-			.get(`${server}/refresh_token`, {
-				data: {
-					refresh_token: refreshToken,
-				},
-			})
-			.then(() => {
-				getToken();
-				console.log("new access_token:", token);
-			})
-			.catch((err) => console.log(err));
-	};
+	// const getRefreshToken = async () => {
+	// 	console.log("old access token:", token);
+	// 	const response = await axios
+	// 		.get(`${server}/refresh_token`, {
+	// 			data: {
+	// 				refresh_token: refreshToken,
+	// 			},
+	// 		})
+	// 		.then(() => {
+	// 			getToken();
+	// 			console.log("new access_token:", token);
+	// 		})
+	// 		.catch((err) => console.log(err));
+	// };
 
-	useEffect(() => {
-		console.log(req.query);
-		getToken();
-	}, [token, getRefreshToken]);
+	// useEffect(() => {
+	// 	console.log(req.query);
+	// 	getToken();
+	// }, [token, getRefreshToken]);
 
 	return (
 		<div className="App">
@@ -60,7 +60,7 @@ function App(req, res) {
 							<Topsongs
 								access_token={token}
 								setToken={setToken}
-								getRefreshToken={getRefreshToken}
+								// getRefreshToken={getRefreshToken}
 							/>
 						}
 					></Route>
@@ -70,7 +70,7 @@ function App(req, res) {
 							<Moods
 								access_token={token}
 								setToken={setToken}
-								getRefreshToken={getRefreshToken}
+								// getRefreshToken={getRefreshToken}
 							/>
 						}
 					></Route>
