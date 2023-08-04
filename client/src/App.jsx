@@ -6,11 +6,12 @@ import { Home } from "./components/Home.jsx";
 import { Login } from "./components/Login.jsx";
 import { Navbar } from "./components/Navbar";
 import { Topsongs } from "./components/Topsongs";
-import { Moods } from "./components/Moods";	
+import { Moods } from "./components/Moods";
 
-export const server = 'https://listening-to-yourself-server.vercel.app'
+export const server = "https://listening-to-yourself-server.vercel.app";
 
-function App() {
+function App(req, res) {
+	console.log(req.query);
 	const [token, setToken] = useState("");
 	const [refreshToken, setRefreshToken] = useState("");
 
@@ -18,6 +19,7 @@ function App() {
 		try {
 			const response = await axios(`${server}/token`);
 			setToken(response.data.access_token);
+			localStorage.setItem();
 			if (response.data.refreshToken) {
 				setRefreshToken(response.data.refresh_token);
 			}
@@ -36,12 +38,13 @@ function App() {
 			})
 			.then(() => {
 				getToken();
-				console.log('new access_token:', token)
+				console.log("new access_token:", token);
 			})
 			.catch((err) => console.log(err));
 	};
 
 	useEffect(() => {
+		console.log(req.query);
 		getToken();
 	}, [token, getRefreshToken]);
 
