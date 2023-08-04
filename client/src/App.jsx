@@ -44,13 +44,10 @@ function App(req, res) {
 
 	useEffect(() => {
 		const URLparams = new URLSearchParams(window.location.search);
-		console.log(URLparams);
+		console.log(URLparams.getAll);
 		console.log(URLparams.get("token"));
 		setToken(URLparams.get("token"));
-		sessionStorage.setItem("token", token);
-		console.log("useState token:", token);
-		console.log("session's token:", sessionStorage.getItem("token"));
-		// sessionStorage.setItem("access_token", req?.query.access_token);
+		// sessionStorage.setItem("token", token);
 	}, []);
 
 	return (
