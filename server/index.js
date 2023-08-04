@@ -80,7 +80,7 @@ app.get('/callback', (req, res) => {
         // access_token = response.data.access_token;
         // req.session.access_token = access_token;
         // res.redirect("http://localhost:5173/")
-        res.redirect("https://listening-to-yourself.vercel.app/?token=" + encodeURIComponent(response.data.access_token))
+        res.redirect("https://listening-to-yourself.vercel.app/?token=")
     }).catch(error => {
         res.send(error)
         // res.redirect("http://localhost:5173/")
