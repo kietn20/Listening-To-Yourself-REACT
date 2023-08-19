@@ -72,9 +72,8 @@ app.get('/callback', (req, res) => {
         // res.redirect("http://localhost:5173/")
         res.redirect("https://listening-to-yourself.vercel.app/?token=" + encodeURIComponent(response.data.access_token))
     }).catch(error => {
-        res.send(error)
         // res.redirect("http://localhost:5173/")
-        res.send('You are not in the authorized list. Please contact @kite for permission to enter.')
+        res.send("This Web Application is currently in DEVELOPMENT MODE which SPOTIFY only allows USERS that are manually added (by me) into their user management in order to show users their contents. I am waiting for Spotify's pending approval in order to release this web application to the general public. In the meantime, please submit this easy form with your Spotify's email in order to see contents. https://docs.google.com/forms/d/e/1FAIpQLSfFKP8TXioxqkKFmTRMcChEEm3W9Fnv8TcX6unll4ysF4x_Iw/viewform")
         // res.redirect("https://listening-to-yourself.vercel.app/")
     })
 });
