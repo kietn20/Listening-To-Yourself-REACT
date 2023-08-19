@@ -13,7 +13,7 @@ This Web Application is currently in DEVELOPMENT MODE which SPOTIFY only allows 
 ## Images if site cannot be accessed
 
 Home Page
-![homepage](https://github.com/kietn20/Listening-to-Yourself/blob/main/static/docs/images/homepage.png?raw=true)
+![homepage](https://github.com/kietn20/Listening-To-Yourself-REACT/blob/main/client/src/assets/LTYreactHomepage.png)
 
 Top Songs
 ![songspage1](https://github.com/kietn20/Listening-to-Yourself/blob/main/static/docs/images/songpage1.png?raw=true)
