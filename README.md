@@ -1,12 +1,11 @@
-# [Listen To Yourself](https://listening-to-yourself.vercel.app/) (pending spotify approval to release publicly)
-
+# [Listen To Yourself](https://listening-to-yourself.vercel.app/) 
 What is your taste in music? Let's find out, and maybe discover new bops along the way.
 
 ## Description
 
 Curious about your listening habits? Well, let's trace back to what you have been listening to for the past weeks, months, or years. You can request some recommendations based on the top tracks. You will be able to listen and add the recommendations to an existing playlist if needed. Furthermore, learn about your current musical moods and how they represent you. Discover who you are based on what you listen to.
 
-## Development Mode 
+## Development Mode (TLDR: pending approval from Spotify to release publicly)
 
 This Web Application is currently in DEVELOPMENT MODE which SPOTIFY only allows USERS that are manually added into their user management in order to show users their contents. I am waiting for Spotify's pending approval in order to release this web application to the general public. In the meantime, please submit this easy form with your Spotify's email in order to see contents. https://docs.google.com/forms/d/e/1FAIpQLSfFKP8TXioxqkKFmTRMcChEEm3W9Fnv8TcX6unll4ysF4x_Iw/viewform
 
