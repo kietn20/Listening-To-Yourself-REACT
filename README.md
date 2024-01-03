@@ -1,5 +1,4 @@
-# Listening To Yourself 
-
+# [Listen To Yourself](https://listening-to-yourself.vercel.app/) (pending approval from Spotify to release publicly)
 What is your taste in music? Let's find out, and maybe discover new bops along the way.
 
 ## Description
