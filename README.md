@@ -5,7 +5,7 @@ What is your taste in music? Let's find out, and maybe discover new bops along t
 
 Curious about your listening habits? Well, let's trace back to what you have been listening to for the past weeks, months, or years. You can request some recommendations based on the top tracks. You will be able to listen and add the recommendations to an existing playlist if needed. Furthermore, learn about your current musical moods and how they represent you. Discover who you are based on what you listen to.
 
-<!-- Home Page
+Home Page
 ![homepage](https://github.com/kietn20/Listening-To-Yourself-REACT/blob/main/client/src/assets/LTYreactHomepage.png)
 
 Top Songs
@@ -19,7 +19,7 @@ Moods Cover Collage
 ![songspage1](https://github.com/kietn20/Listening-To-Yourself-REACT/blob/main/client/src/assets/LTYreactMoodspage1.png)
 
 Moods Page <br />
-![songspage1](https://github.com/kietn20/Listening-To-Yourself-REACT/blob/main/client/src/assets/LTYreactMoodspage3.png) -->
+![songspage1](https://github.com/kietn20/Listening-To-Yourself-REACT/blob/main/client/src/assets/LTYreactMoodspage3.png)
 
 ## Getting Started
 
